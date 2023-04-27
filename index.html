@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="./style.css">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v6.js"></script>
+
+<h1>Prices of homes are soaring. Is the end upon us?</h1>
+
+<h2>Why is the topic of homes so close to our hearts?</h2>
+
+<p> 80% of the population resides in HDBs in Singapore. While HDB was birthed as a social policy to provide affordable 
+    housing to Singapore Citizens/Permanent Residents, opportunistic flat owners have been rapidly selling BTO-es once 
+    MOP has been reached for a windfall capital gain. These data visualizations seek to shed light on what the market has 
+    been up to recently. </p>
+
+<div id="rectchart"></div>
+
+<p>The Minimum Occupation Period(MOP) for HDB flats was introduced to curtail the rapid selling of HDB flats by individuals 
+  seeking to make a quick profit. Today, the MOP for resale flats is five years, meaning that flat owners that bought their 
+  flats from HDB will have to occupy the flat for five years before it can be sold on the resale market.
+  <a href="https://www.hdb.gov.sg/residential/selling-a-flat/eligibility" title="W3.CSS" target="_blank" class="w3-hover-text-green">More info here</a>
+  
+  Using transaction data from Jan 2017 to Dec 2022, we analyze flats with a remaining lease period of 90 years and above. 
+  These flats would have recently fulfilled the MOP requirement before the flat can be sold on the resale market and would 
+  be the first resale transaction of the flat in the open market (before the next 5-year MOP is reached). 
+  
+  This data story is relevant to those seeking to purchase first-generation resale flats, which still bear many similarities 
+  to BTO flats except that these potential buyers need not wait for the project to be built. The visualizations may be 
+  especially relevant to young couples who are looking for resale flats with a lease to comfortably cover their lifetime. </p>
+
+<h2>Recent trends in the resale market</h2>
+
+<p>Despite our average household income increasing year-on-year, when compared to the rise in resale prices of recently MOP 
+  flats, our relative purchasing power is diminished. </p>
+  
+<p>Prices aren’t just increasing, but the flat sizes have been decreasing. Resultantly, the cost of purchasing a square metre 
+  of property has been increasing over time across the areas in Singapore. Of interest is Central area and Bishan, where no 
+  sale of MOPs have taken place since 2006 as there have been no new BTO projects at those mature estates in the past decade.</p>
+
+<div id="scatterplot_price_sqft_against_year"></div>
+
+<div>
+  <select id="town-select3">
+    <option value="all" selected>All Towns</option>
+    <option value="ANG MO KIO">ANG MO KIO</option>
+    <option value="BEDOK">BEDOK</option>
+    <option value="BISHAN">BISHAN</option>    
+    <option value="BUKIT MERAH">BUKIT MERAH</option>
+    <option value="BUKIT PANJANG">BUKIT PANJANG</option>
+    <option value="CENTRAL AREA">CENTRAL AREA</option>
+    <option value="CLEMENTI">CLEMENTI</option>
+    <option value="HOUGANG">HOUGANG</option>
+    <option value="JURONG WEST">JURONG WEST</option>
+    <option value="JURONG EAST">JURONG EAST</option>
+    <option value="KALLANG/WHAMPOA">KALLANG/WHAMPOA</option>
+    <option value="PUNGGOL">PUNGGOL</option>
+    <option value="QUEENSTOWN">QUEENSTOWN</option>
+    <option value="SEMBAWANG">SEMBAWANG</option>
+    <option value="SENGKANG">SENGKANG</option>
+    <option value="TAMPINES">TAMPINES</option>
+    <option value="TOA PAYOH">TOA PAYOH</option>
+    <option value="YISHUN">YISHUN</option>
+    <option value="CHOA CHU KANG">CHOA CHU KANG</option>
+    <option value="GEYLANG">GEYLANG</option>
+  </select>
+</div>
+
+<h2>Strategies to tide us through</h2>
+
+<p>However, in the face of rising prices, buyers are not helpless. Below are some questions we sought to explore to better understand the market for such flats. 
+
+  The prices of flats typically vary because of the following reasons: 
+  
+  What to buy </p>
+  
+<div id="scatterplot_price_against_year"></div>
+
+<div>
+  <select id="flat-select2">
+    <option value="all" selected>All Flat Types</option>
+    <option value="2 ROOM">2 ROOM</option>
+    <option value="3 ROOM">3 ROOM</option>
+    <option value="4 ROOM">4 ROOM</option>    
+    <option value="5 ROOM">5 ROOM</option>
+  </select>
+</div>
+
+<div>
+  <select id="town-select2">
+    <option value="all" selected>All Towns</option>
+    <option value="ANG MO KIO">ANG MO KIO</option>
+    <option value="BEDOK">BEDOK</option>
+    <option value="BISHAN">BISHAN</option>    
+    <option value="BUKIT MERAH">BUKIT MERAH</option>
+    <option value="BUKIT PANJANG">BUKIT PANJANG</option>
+    <option value="CENTRAL AREA">CENTRAL AREA</option>
+    <option value="CLEMENTI">CLEMENTI</option>
+    <option value="HOUGANG">HOUGANG</option>
+    <option value="JURONG WEST">JURONG WEST</option>
+    <option value="JURONG EAST">JURONG EAST</option>
+    <option value="KALLANG/WHAMPOA">KALLANG/WHAMPOA</option>
+    <option value="PUNGGOL">PUNGGOL</option>
+    <option value="QUEENSTOWN">QUEENSTOWN</option>
+    <option value="SEMBAWANG">SEMBAWANG</option>
+    <option value="SENGKANG">SENGKANG</option>
+    <option value="TAMPINES">TAMPINES</option>
+    <option value="TOA PAYOH">TOA PAYOH</option>
+    <option value="YISHUN">YISHUN</option>
+    <option value="CHOA CHU KANG">CHOA CHU KANG</option>
+    <option value="GEYLANG">GEYLANG</option>
+  </select>
+</div>
+
+<p>When to buy</p>
+
+<div id="months"></div>
+
+<h2>Concluding thoughts</h2>
+
+<p>First-generation resale flats are a great choice for those looking for a young flat. As opposed to new BTO flats, it does not require 
+  balloting or a long waiting time. </p>
+
+<script>
+  // set the dimensions and margins of the graph
+  const margin = {top: 10, right: 450, bottom: 50, left: 80},
+        width = 1000 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+</script>
+
+<script src="C:\Users\yijie\OneDrive\Documents\SUTD\Trimester 2\Interactive Data Visualization\Final Project\js file 0.js"></script>
+<script src="C:\Users\yijie\OneDrive\Documents\SUTD\Trimester 2\Interactive Data Visualization\Final Project\js file 1.js"></script>
+<script src="C:\Users\yijie\OneDrive\Documents\SUTD\Trimester 2\Interactive Data Visualization\Final Project\js file 2.js"></script>
+<script src="C:\Users\yijie\OneDrive\Documents\SUTD\Trimester 2\Interactive Data Visualization\Final Project\js file 3.js"></script>
